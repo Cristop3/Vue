@@ -4,10 +4,120 @@
 <head>
     <meta charset="utf-8">
     <title>bs-vue-msg</title>
+    <link rel='styleSheet' href="../../lib/bootstrap.min.css" />
+    <script type='text/javascript' src="../../lib/jquery-1.7.2.js"></script>
+    <script type='text/javascript' src='../../lib/bootstrap.js'></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <style>
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            new Vue({
+                el:'#app',
+                data:{
+                    username:'',//数据_姓名
+                    age:'',//数据_年龄
+                    Msgs:[], //用户集合,
+                    rowIndex:''
+                },
+                methods:{
+                    addMsg:function(){
+                       //添加用户信息函数
+                       this.Msgs.push({
+                            username:this.username,
+                            age:this.age
+                        });
+
+                        this.username='';
+                        this.age='';
+                    },
+                    deleteMsgs:function(index){
+                        //删除用户信息函数
+                        if(index>0){
+                            this.Msgs.splice(index,1);
+                        }else{
+                            this.Msgs = []
+                        }
+                    }
+                }
+            })
+        })
+    </script>
 </head>
 
 <body>
-    123
+    <div class='container' id='app'>
+        <form role="form">
+            <div class="form-group">
+                <label for='姓名'>Name</label>
+                <input v-model='username' type="text" class="form-control" placeholder="请输入你的姓名..." />
+            </div>
+
+            <div class="form-group">
+                <label for='年龄'>Age</label>
+                <input v-model='age' type="text" class="form-control" placeholder="请输入你的年龄..." />
+            </div>
+
+            <div class="form-group">
+                <button v-on:click='addMsg()' type="button" class='btn btn-info btn-sm'>确认</button>
+                <button type="reset" class='btn btn-danger btn-sm'>重置</button>
+            </div>
+        </form>
+        <table class="table table-striped table-bordered table-hover">
+            <!--表头表标签-->
+            <caption class="text-danger h3">用户具体信息</caption>
+            <thead>
+                <th class="text-center">序号</th>
+                <th class="text-center">姓名</th>
+                <th class="text-center">年龄</th>
+                <th class="text-center">操作</th>
+            </thead>
+            <tbody class="text-center">
+                <tr v-for='(item,index) in Msgs'>
+                    <td>{{index+1}}</td>
+                    <td>{{item.username}}</td>
+                    <td>{{item.age}}</td>
+                    <td>
+                        <button v-on:click='rowIndex=index' class='btn btn-danger btn-sm' data-toggle='modal' data-target='#myModal'>删除</button>
+                    </td>
+                </tr>
+                <tr class="warning" v-show='Msgs.length != 0'>
+                    <td colspan="4" class="text-right"><button v-on:click='rowIndex=-1' type="button" class="btn btn-info btn-sm" data-toggle='modal' data-target='#myModal'>全部删除</button></td>
+                </tr>
+                <tr class="danger" v-show="Msgs.length == 0">
+                    <td colspan="4" class="text-center"><label class="text-danger">抱歉啊 暂无数据...</label></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!--定义模态框的角色-->
+        <div id='myModal' class="modal" role="dialog">
+            <!--定义模态框dialog-->
+            <div class="modal-dialog modal-sm">
+                <!--定义模态框内容-->
+                <div class="modal-content">
+                    <!--定义模态框的头部-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss='modal'>
+                            <span>&times;</span>
+                        </button>
+                        <h4 class="modal-title" v-show='rowIndex>=0'>确定要删除吗?</h4>
+                        <h4 class="modal-title" v-show='rowIndex<0'>确定要全部删除吗?</h4>
+                    </div>
+                    <!--定义模态框的体部-->
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <!--定义模态框的尾部-->
+                    <div class="modal-footer">
+                        <button v-on:click='deleteMsgs(index)' class="btn btn-info btn-sm" data-dismiss='modal'>确定</button>
+                        <button class="btn btn-danger btn-sm" data-dismiss='modal'>取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
