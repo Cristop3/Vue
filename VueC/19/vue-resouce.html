@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>bs-vue-msg</title>
+    <link rel='styleSheet' href="../../lib/bootstrap.min.css" />
+    <script type='text/javascript' src="../../lib/jquery-1.7.2.js"></script>
+    <script type='text/javascript' src='../../lib/bootstrap.js'></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="../../lib/vue-resource.js"></script>
+    <style>
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            new Vue({
+                el:'#get',
+                data:{
+
+                },
+                methods:{
+                    get:function(){
+                        this.$http.get('gaet.txt').then(function(res){
+                            alert(res.data)
+                        },function(res){
+                            alert(res.status)
+                        })
+                    }
+                }
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <input id='get' type='button' value='get' @click='get()' />
+</body>
+
+</html>
