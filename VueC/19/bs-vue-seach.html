@@ -13,10 +13,22 @@
         li {
             list-style: none;
         }
-        
         .move {
-            background-color: gray;
+            background-color:aqua;
+            opacity: 1;
+            font-weight:bold;
+            font-size:18px;
+            color: black;
         }
+        .move:hover{
+            cursor: pointer;
+        }
+        .ul{
+            width:100%;
+            background-color: silver;
+            opacity: 0.5;
+        }
+
     </style>
 
     <script>
@@ -49,6 +61,7 @@
                             alert(res.status)
                         })
                     },
+                    //键盘上移操作
                     selectDown: function () {
                         this.rowIndex++;
                         if(this.rowIndex==this.searchData.length){
@@ -56,12 +69,18 @@
                         }
                         this.searchText = this.searchData[this.rowIndex]
                     },
+                    //键盘下移操作
                     selectUp:function(){
                         this.rowIndex--;
                         if(this.rowIndex==-1){
                             this.rowIndex = this.searchData.length - 1
                         }
                         this.searchText = this.searchData[this.rowIndex]
+                    },
+                    //鼠标移动操作
+                    overWhich:function(index){
+                        this.rowIndex = index;
+                        this.searchText = this.searchData[index]
                     }
                 }
             })
@@ -78,8 +97,8 @@
             </div>
 
             <div class="form-group-sm">
-                <ul>
-                    <li v-for='(item,index) in searchData' :class='{move:index==rowIndex}'>
+                <ul :class='{ul:searchData.length!=0}'>
+                    <li v-for='(item,index) in searchData' :class='{move:index==rowIndex}' @mouseover='overWhich(index)'>
                         {{item}}
                     </li>
                 </ul>
