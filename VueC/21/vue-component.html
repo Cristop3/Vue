@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function(){
+            
+            // var ljx = Vue.extend({
+            //     template:'<h2>{{msg}}</h2>',
+            //     //组件里面放数据 data必须是函数的形式，
+            //     //函数必须返回一个对象json
+            //     data(){
+            //         return {
+            //             msg:'我是李佳信……'
+            //         }
+            //     }
+            // })
+
+            // Vue.component('ljx',ljx)
+
+            Vue.component('ljx',{
+                template:'<h2 @click="me()">{{msg}}</h2>',
+                data(){
+                    return {
+                        msg:'我是你们爸'
+                    }
+                },
+                methods:{
+                    me(){
+                        alert('你们爸')
+                    }
+                }
+            })
+
+            var vm = new Vue({
+                el:'#app',
+                data:{
+
+                }
+            })
+        }
+    </script>        
+</head>
+
+<body>
+    <div id='app'>
+        <ljx></ljx>
+    </div>
+</body>
+
+</html>
