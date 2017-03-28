@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script type='text/javascript' src='../../lib/vue-router.min.js'></script>
+</head>
+
+<body>
+    <div id='app'>
+        <ul>
+            <li><a v-link='{path:"/home"}'>主页</a></li>
+            <li><a v-link='{path:"/news"}'>新闻</a></li>
+        </ul>
+        <hr>
+        <div>
+            <router-view></router-view>
+        </div>
+    </div>
+
+    <script>
+        //1.设计根组件
+        var Root = Vue.extend()
+
+        //2.路由的组件准备
+        Vue.component('home',{
+            template:"<h3>我是主页</h3>"
+        })
+        Vue.component('news',{
+            template:'<h3>我是新闻页面</h3>'
+        })
+
+        //3.准备路由
+        var router = new VueRouter();
+
+        //4.关联将路由组件跟根组件相关联
+        router.map({
+            'home':{
+                componnent:home
+            },
+            'news':{
+                component:news
+            }
+        })
+
+        //5.启动路由
+        router.start(Root,'#app')
+
+    </script>
+</body>
+
+</html>
