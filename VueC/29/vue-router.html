@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>vue路由</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <style>
+        .router-link-active {
+            color: red;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            const Home = {
+                template: '<strong>这里是主页</strong>'
+            }
+            const News = {
+                template: '<strong>这里是新闻页</strong>'
+            }
+
+            const routes = [{
+                    path: '/home',
+                    component: Home
+                },
+                {
+                    path: '/news',
+                    component: News
+                }
+            ]
+
+            const router = new VueRouter({
+                routes
+            })
+
+            const app = new Vue({
+                router
+            }).$mount('#app')
+        }
+    </script>
+</head>
+
+<body>
+    <div id='app'>
+        <h1>this is my vue</h1>
+        <p>
+            <router-link to='/home'>To Home</router-link>
+            <router-link to='/news'>To News</router-link>
+        </p>
+        <div style="border:1px dashed blueviolet">
+            <router-view></router-view>
+        </div>
+    </div>
+</body>
+
+</html>

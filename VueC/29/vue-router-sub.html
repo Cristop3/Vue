@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>路由嵌套</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://unpkg.com/vue/dist/vue.js"></script>
+        <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+        <script>
+            window.onload = function(){
+                const Home = {
+                    template:
+                    '<div><h2>User {{ $router.params.id }}</h2><router-view></router-view></div>'
+                }
+
+                const Profile = {
+                    template:''
+                }
+
+                const 
+
+                const router = new VueRouter({
+                    routes:[
+                        {
+                            path:'/user/:id',
+                            component:Home
+                        }
+                    ]
+                })
+            }
+        </script>
+    </head>
+    <body>
+        <div id='app'>
+            <router-view></router-view>
+        </div>
+    </body>
+</html>
