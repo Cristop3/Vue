@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id='app'>
+        <father>
+            <son></son>
+        </father>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        /*事实证明 一般这种全局声明应该放在实例化Vue代码的前面*/
+        // Vue.component('father',{
+        //     template:`
+        //         <h3>我是父级组件</h3>
+        //     `
+        // })
+
+        const Father = {
+            template: `
+                <span>我是父级组件 -> {{msg}}</span>
+            `,
+            data() {
+                return {
+                    msg: '我是父组件的数据'
+                }
+            }
+        }
+        const Son = {
+            template: `
+                <h4>我是子组件</h4>
+            `
+        }
+
+        new Vue({
+            el: '#app',
+            data: {
+                msg:'我是'
+            },
+            components: {
+                father: Father,
+                children:{
+                    son:Son
+                }
+            }
+        })
+
+
+    }
+</script>
+
+</html>
